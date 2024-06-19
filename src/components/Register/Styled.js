@@ -72,3 +72,11 @@ export const Label = styled.label`
   font-size: 12px;
   gap: 10px;
 `;
+
+export const Image = styled.img`
+  border-radius: 10px;
+  height: 50px;
+  object-fit: cover;
+  opacity: 0.6;
+  width: 50px;
+`;

@@ -124,3 +124,11 @@ export const IconButton = styled.button`
   display: flex;
   padding: 10px;
 `;
+export const Emoji = styled.div`
+  position: relative;
+`;
+export const Picker = styled.div`
+  bottom: 50px;
+  left: 0px;
+  position: absolute;
+`;

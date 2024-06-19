@@ -17,7 +17,7 @@ const Register = () => {
           <S.Input type="password" placeholder="password" />
           <S.FileInput type="file" id="file" />
           <S.Label htmlFor="file">
-            <Icon path={mdiImageOutline} size={1.5} />
+            <S.Image src={"./avatar.png"} alt="" />
             <span>Add an avatar</span>
           </S.Label>
           <S.Button>Sign Up</S.Button>

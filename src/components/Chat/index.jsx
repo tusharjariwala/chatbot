@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import EmojiPicker from "emoji-picker-react";
 import Icon from "@mdi/react";
 import {
   mdiCameraOutline,
@@ -12,6 +13,18 @@ import {
 import * as S from "./Styled";
 
 const Chat = () => {
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState("");
+  const endRef = useRef(null);
+
+  const handleEmoji = (e) => {
+    setText((prev) => prev + e.emoji);
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behaviour: "smooth" });
+  }, []);
   return (
     <S.Chat>
       <S.Top>
@@ -44,6 +57,7 @@ const Chat = () => {
           <S.Img src="./avatar.png" alt="avatar" />
           <S.Text>Hi,How Are You</S.Text>
         </S.Message>
+        <div ref={endRef}></div>
       </S.Center>
 
       <S.Bottom>
@@ -54,7 +68,16 @@ const Chat = () => {
         </S.Image>
         <S.Input type="text" placeholder="Type a message..." />
         <S.DivWrapper>
-          <Icon path={mdiEmoticonExcitedOutline} size={1.5} />
+          <S.Emoji>
+            <Icon
+              path={mdiEmoticonExcitedOutline}
+              size={1.5}
+              onClick={() => setOpen(!open)}
+            />
+            <S.Picker>
+              <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+            </S.Picker>
+          </S.Emoji>
           <S.Button>
             <Icon path={mdiSend} size={1} />
           </S.Button>
