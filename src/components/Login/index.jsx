@@ -1,6 +1,6 @@
 import React from "react";
-import * as S from "./Styled";
 import { useNavigate } from "react-router-dom";
+import * as S from "./Styled";
 
 const Login = () => {
   const navigate = useNavigate();

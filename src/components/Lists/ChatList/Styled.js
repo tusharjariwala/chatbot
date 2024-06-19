@@ -3,57 +3,63 @@ import styled from "styled-components";
 export const ChatList = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
 `;
 export const SearchBar = styled.div`
-  display: flex;
   border: 1;
-  padding: 10px;
+  display: flex;
   gap: 10px;
   justify-content: space-between;
+  padding: 10px;
 `;
 export const Input = styled.input`
   background-color: transparent;
   border: none;
-  color: white;
+  color: black;
+  margin: 0px 10px;
   outline: none;
   width: 100%;
-  margin: 0px 10px;
 `;
 export const Plus = styled.div`
-  background-color: rgba(17, 25, 40, 0.5);
-  padding: 10px;
+  background-color: #ececec;
   border-radius: 10px;
   cursor: pointer;
   display: flex;
+  padding: 10px;
 `;
 export const Search = styled.div`
-  display: flex;
   align-items: center;
+  background-color: #ececec;
   border-radius: 10px;
-  background-color: rgba(17, 25, 40, 0.5);
+  display: flex;
   flex: 1;
   padding: 0px 10px;
 `;
 export const Img = styled.img`
-  width: 50px;
-  height: 50px;
   border-radius: 50%;
+  height: 45px;
   object-fit: cover;
+  width: 45px;
 `;
 export const Item = styled.div`
+  align-items: center;
   display: flex;
   gap: 10px;
-  align-items: center;
-  padding: 20px 0px;
-  border-bottom: 1px solid #dddddd35;
+  padding: 10px;
 `;
 export const Detail = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 `;
 export const Items = styled.div`
-  overflow-y: auto;
   flex: 1;
+  overflow-y: auto;
+`;
+export const Description = styled.div`
+  font-size: 12px;
+  opacity: 0.5;
+`;
+
+export const Line = styled.div`
+  border-bottom: 1px solid #efeff4;
 `;

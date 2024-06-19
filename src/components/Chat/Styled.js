@@ -1,32 +1,32 @@
 import styled from "styled-components";
 
 export const Chat = styled.div`
-  flex: 2;
   display: flex;
   flex-direction: column;
+  flex: 2;
   width: 100%;
 `;
 export const Img = styled.img`
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
+  height: 40px;
   object-fit: cover;
+  width: 40px;
 `;
 export const Top = styled.div`
-  padding: 20px;
-  display: flex;
   align-items: center;
+  border-bottom: 1px solid #efeff4;
+  display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #dddddd35;
+  padding: 10px;
 `;
 export const User = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 10px;
 `;
 export const Icon = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 10px;
 `;
 export const Center = styled.div`
@@ -39,66 +39,88 @@ export const Center = styled.div`
   padding: 20px;
 `;
 export const Bottom = styled.div`
-  margin-top: auto;
-  padding: 15px;
+  border-top: 1px solid #efeff4;
   display: flex;
   gap: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.125);
   justify-content: space-between;
+  margin-top: auto;
+  padding: 15px;
 `;
 
 export const Button = styled.button`
-  background-color: #5183fe;
-  color: white;
-  padding: 10px 20px;
-  border: none;
+  align-items: center;
+  background-color: #7b91d7;
   border-radius: 5px;
-  cursor: pointer;
-`;
-export const Input = styled.input`
-  flex: 1;
-  background-color: rgba(17, 25, 40, 0.5);
   border: none;
-  outline: none;
   color: white;
-  border-radius: 10px;
-  font-size: 16px;
+  cursor: pointer;
+  display: flex;
   padding: 10px;
 `;
+export const Input = styled.input`
+  background-color: #ececec;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  flex: 1;
+  font-size: 16px;
+  outline: none;
+  padding: 10px;
+  &::placeholder {
+    color: rgb(175, 175, 175);
+  }
+`;
 export const Image = styled.div`
-  display: flex;
   align-items: center;
+  cursor: pointer;
+  display: flex;
   gap: 10px;
 `;
 export const Message = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 10px;
-`;
-export const Profile = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
 `;
 
 export const Text = styled.p`
-  padding: 10px;
+  background: #ececec;
   border-radius: 0px 10px 10px 10px;
-  background: white;
   color: black;
+  padding: 10px;
 `;
 
 export const OwnMessage = styled.div`
+  align-items: center;
   align-self: flex-end;
   display: flex;
-  align-items: center;
   gap: 10px;
 `;
 
 export const Para = styled.div`
-  background-color: #5183fe;
+  background-color: #7b91d7;
   border-radius: 0px 10px 10px 10px;
-  padding: 10px;
   color: white;
+  padding: 10px;
+`;
+
+export const Description = styled.div`
+  font-size: 12px;
+  opacity: 0.5;
+`;
+
+export const DivWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 10px;
+`;
+
+export const IconButton = styled.button`
+  align-items: center;
+  background-color: #7b91d7;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  padding: 10px;
 `;

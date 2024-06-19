@@ -1,10 +1,10 @@
 import React from "react";
-import * as S from "./Styled";
 import UserInfo from "./UserInfo";
 import ChatList from "./ChatList";
+import * as S from "./Styled";
 const Lists = () => {
   return (
-    <S.Lists className="Lists">
+    <S.Lists>
       <UserInfo />
       <ChatList />
     </S.Lists>

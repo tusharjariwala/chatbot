@@ -1,6 +1,6 @@
 import React from "react";
-import { mdiDotsHorizontal } from "@mdi/js";
-
+import { mdiLogout } from "@mdi/js";
+import Icon from "@mdi/react";
 import * as S from "./Styled";
 
 const UserInfo = () => {
@@ -10,7 +10,9 @@ const UserInfo = () => {
         <S.Img src="./avatar.png" alt="avatar" />
         <div>Jane</div>
       </S.User>
-      <S.Button>Logout</S.Button>
+      <S.Button>
+        <Icon path={mdiLogout} size={1} />
+      </S.Button>
     </S.UserDetail>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import Lists from "../Lists";
 import Chat from "../Chat";
+
 import * as S from "./Styled";
 const Home = () => {
   return (

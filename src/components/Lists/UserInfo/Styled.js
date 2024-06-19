@@ -1,33 +1,36 @@
-import styled from "styled-components";
 import UIcon from "@mdi/react";
+import styled from "styled-components";
+
 export const UserDetail = styled.div`
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 10px;
 `;
 export const Img = styled.img`
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
+  height: 40px;
   object-fit: cover;
+  width: 40px;
 `;
 export const User = styled.div`
+  align-items: center;
   display: flex;
   gap: 10px;
-  align-items: center;
 `;
 export const Icon = styled(UIcon)`
-  display: flex;
-  gap: 10px;
   align-items: center;
   cursor: pointer;
+  display: flex;
+  gap: 10px;
 `;
 export const Button = styled.button`
-  background-color: #5183fe;
-  border-radius: 5px;
+  align-items: center;
+  background-color: #7b91d7;
+  border-radius: 50%;
   border: none;
   color: white;
   cursor: pointer;
+  display: flex;
   padding: 10px;
 `;
