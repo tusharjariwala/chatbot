@@ -1,11 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Icon from "@mdi/react";
 import { mdiMagnify, mdiMinus, mdiPlus } from "@mdi/js";
 import AddUserModal from "../../modal/UserModal";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { db } from "../../../lib/firebase";
 import * as S from "./Styled";
 
 const ChatList = () => {
+  const { users } = useSelector((state) => state.user);
   const [addMode, setAddMode] = useState(false);
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    const unSub = onSnapshot(
+      doc(db, "userchats", users.user.id),
+      async (res) => {
+        if (res.data()) {
+          const items = res.data().chats;
+          const promise = items.map(async (item) => {
+            const userDocRef = doc(db, "users", item.receiverId);
+            const userDocSnap = await getDoc(userDocRef);
+            const user = userDocSnap.data();
+            return {
+              ...item,
+              user,
+            };
+          });
+          const chatData = await Promise.all(promise);
+          setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+        }
+      }
+    );
+    return () => unSub();
+  }, [users.user.id]);
+
   return (
     <>
       <S.ChatList>
@@ -22,42 +51,30 @@ const ChatList = () => {
             />
           </S.Plus>
         </S.SearchBar>
-        <S.Items>
-          <S.Item>
-            <S.Img src="./avatar.png" alt="avatar" />
-            <S.Detail>
-              <div>John</div>
-              <S.Description>description</S.Description>
-            </S.Detail>
-          </S.Item>
-          <S.Line />
-          <S.Item>
-            <S.Img src="./avatar.png" alt="avatar" />
-            <S.Detail>
-              <div>John</div>
-              <S.Description>description</S.Description>
-            </S.Detail>
-          </S.Item>
-          <S.Line />
-          <S.Item>
-            <S.Img src="./avatar.png" alt="avatar" />
-            <S.Detail>
-              <div>John</div>
-              <S.Description>description</S.Description>
-            </S.Detail>
-          </S.Item>
-          <S.Line />
-          <S.Item>
-            <S.Img src="./avatar.png" alt="avatar" />
-            <S.Detail>
-              <div>John</div>
-              <S.Description>description</S.Description>
-            </S.Detail>
-          </S.Item>
-          <S.Line />
-        </S.Items>
+        {chats.length > 0
+          ? chats.map((items) => (
+              <S.Items>
+                <S.Item>
+                  <S.Img
+                    src={items.user.avatar || "./avatar.png"}
+                    alt="avatar"
+                  />
+                  <S.Detail>
+                    <div>{items.user.username}</div>
+                    <S.Description>{items.user.lastMessage}</S.Description>
+                  </S.Detail>
+                </S.Item>
+                <S.Line />
+              </S.Items>
+            ))
+          : ""}
       </S.ChatList>
-      {addMode && <AddUserModal />}
+      {addMode && (
+        <>
+          <S.Overlay onClick={() => setAddMode(false)} />
+          <AddUserModal />
+        </>
+      )}
     </>
   );
 };

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const FormWrapper = styled.div`
@@ -59,7 +60,7 @@ export const Button = styled.button`
   cursor: pointer;
   padding: 10px 20px;
 `;
-export const Link = styled.a`
+export const ULink = styled(Link)`
   color: #5d5b8d;
   cursor: pointer;
   margin-top: 10px;

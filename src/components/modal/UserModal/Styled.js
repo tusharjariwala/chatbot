@@ -1,17 +1,14 @@
 import styled from "styled-components";
 
 export const AddUser = styled.div`
-  background-color: red;
+  background-color: white;
   border-radius: 10px;
-  bottom: 0;
-  height: max-content;
-  left: 0;
-  margin: auto;
   padding: 30px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: max-content;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 `;
 export const Form = styled.form`
   display: flex;
@@ -22,7 +19,8 @@ export const Input = styled.input`
   border-radius: 10px;
   border: none;
   outline: none;
-  padding: 20px;
+  padding: 10px;
+  background-color: #ececec;
 `;
 
 export const Button = styled.button`
@@ -31,13 +29,13 @@ export const Button = styled.button`
   border: none;
   color: white;
   cursor: pointer;
-  padding: 20px;
+  padding: 10px;
 `;
 export const User = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 export const Detail = styled.div`
   align-items: center;

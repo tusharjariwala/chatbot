@@ -4,6 +4,7 @@ export const ChatList = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 export const SearchBar = styled.div`
   border: 1;
   display: flex;
@@ -62,4 +63,14 @@ export const Description = styled.div`
 
 export const Line = styled.div`
   border-bottom: 1px solid #efeff4;
+`;
+
+export const Overlay = styled.div`
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 `;

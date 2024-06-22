@@ -3,12 +3,15 @@ import Lists from "../Lists";
 import Chat from "../Chat";
 
 import * as S from "./Styled";
+
 const Home = () => {
   return (
-    <S.Container>
-      <Lists />
-      <Chat />
-    </S.Container>
+    <>
+      <S.Container>
+        <Lists />
+        <Chat />
+      </S.Container>
+    </>
   );
 };
 

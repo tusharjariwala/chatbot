@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const FormWrapper = styled.div`
   align-items: center;
   background-color: white;
@@ -53,7 +53,7 @@ export const Button = styled.button`
   cursor: pointer;
   padding: 10px 20px;
 `;
-export const Link = styled.a`
+export const ULink = styled(Link)`
   color: #5d5b8d;
   cursor: pointer;
   margin-top: 10px;
