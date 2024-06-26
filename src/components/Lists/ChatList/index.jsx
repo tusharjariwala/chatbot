@@ -33,7 +33,7 @@ const ChatList = () => {
       }
     );
     return () => unSub();
-  }, [users.user.id]);
+  }, [users?.user?.id]);
 
   return (
     <>

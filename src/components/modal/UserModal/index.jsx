@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   arrayUnion,
@@ -16,8 +16,9 @@ import * as S from "./Styled";
 
 const AddUserModal = () => {
   const { users } = useSelector((state) => state.user);
-  const [filterData, setFilterData] = useState(null);
-  console.log("users", users);
+  const [filterData, setFilterData] = useState([]);
+  const [allData, setAllData] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -28,14 +29,57 @@ const AddUserModal = () => {
       const querySnapShot = await getDocs(q);
 
       if (!querySnapShot.empty) {
-        setFilterData(querySnapShot.docs[0].data());
+        const saveFirebaseTodos = [];
+        querySnapShot.forEach((doc) => {
+          if (!filterData.includes(doc.data().id)) {
+            saveFirebaseTodos.push(doc.data());
+          }
+        });
+        setAllData(saveFirebaseTodos);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleAddUser = async () => {
+  useEffect(() => {
+    const handleUser = async () => {
+      try {
+        const userRef = collection(db, "users");
+        const querySnapShot = await getDocs(userRef);
+
+        const userChat = collection(db, "userchats");
+        const userDetails = await getDocs(userChat);
+
+        const array = [];
+        if (!userDetails.empty) {
+          userDetails.forEach((doc) => {
+            doc.data().chats.forEach((user) => {
+              array.push(user.receiverId);
+            });
+          });
+        }
+        if (!querySnapShot.empty) {
+          const saveFirebaseTodos = [];
+          querySnapShot.forEach((doc) => {
+            if (!array.includes(doc.data().id)) {
+              if (doc.data().id !== users.user.id) {
+                saveFirebaseTodos.push(doc.data());
+              }
+            }
+          });
+
+          setAllData(saveFirebaseTodos);
+        }
+        setFilterData(array);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    handleUser();
+  }, [users.user.id]);
+
+  const handleAddUser = async (userId) => {
     const chatsRef = collection(db, "chats");
     const userChatsRef = collection(db, "userchats");
 
@@ -45,9 +89,7 @@ const AddUserModal = () => {
         createdAt: serverTimestamp(),
         message: [],
       });
-      console.log("filterData", filterData);
-      console.log("users.user.id", users.user.id);
-      await updateDoc(doc(userChatsRef, filterData.id), {
+      await updateDoc(doc(userChatsRef, userId), {
         chats: arrayUnion({
           chatId: newRef.id,
           lastMessage: "",
@@ -60,7 +102,7 @@ const AddUserModal = () => {
         chats: arrayUnion({
           chatId: newRef.id,
           lastMessage: "",
-          receiverId: filterData.id,
+          receiverId: userId,
           updatedAt: Date.now(),
         }),
       });
@@ -75,16 +117,20 @@ const AddUserModal = () => {
           <S.Input type="text" placeholder="user name" name="username" />
           <S.Button type="submit">Search</S.Button>
         </S.Form>
-        {filterData !== null ? (
-          <S.User>
-            <S.Detail>
-              <S.Image src={filterData.avatar || "./avatar.png"} alt="" />
-              <span>{filterData.username}</span>
-            </S.Detail>
-            <S.Button onClick={handleAddUser}>Add User</S.Button>
-          </S.User>
+        {allData.length > 0 ? (
+          allData.map((user) => (
+            <S.User>
+              <S.Detail>
+                <S.Image src={user.avatar || "./avatar.png"} alt="" />
+                <span>{user.username}</span>
+              </S.Detail>
+              <S.Button onClick={() => handleAddUser(user.id)}>
+                Add User
+              </S.Button>
+            </S.User>
+          ))
         ) : (
-          <></>
+          <div style={{ marginTop: "20px" }}>No User Found</div>
         )}
       </S.AddUser>
     </>
